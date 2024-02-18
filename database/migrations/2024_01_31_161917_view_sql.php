@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
@@ -34,6 +32,20 @@ return new class extends Migration
             m.kontak_mitra AS kontak_mitra
         FROM mitra m
     ");
+
+    DB::unprepared("DROP VIEW IF EXISTS view_staff_tiketing");
+        DB::unprepared("
+            CREATE VIEW view_staff_tiketing AS
+            SELECT
+                id_st,
+                id_akun,
+                nama_st,
+                kontak_st,
+                foto_st 
+            FROM staff_tiketing
+        ");
+
+
     }
 
     /**
